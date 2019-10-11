@@ -2,8 +2,9 @@
   <div class="container">
       <div class="wrapper">
         <div class="left">
-          <i class="icon"></i>
+          <i class="icon1"></i>
           <input type="text" placeholder="搜索更多好物">
+          <i class="icon2"></i>
         </div>
         <div class="right">
           <span @click="cancel">取消</span>
@@ -45,9 +46,9 @@
         display flex
         align-items center
         box-sizing border-box
-        i
+        .icon1
           display inline-block
-          width 28px
+          width 40px
           height 28px
           background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/search2-553dba3aff.png)
           background-size 28px 28px 

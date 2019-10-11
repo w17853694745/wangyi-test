@@ -9,7 +9,7 @@
       </div>
       <div class="main">
         <div class="img" v-for="(item, index) in topic.itemList" :key="index">
-          <img :src="item.itemUrl" alt="">
+          <img v-lazy="item.itemUrl" :src="item.itemUrl" alt="">
         </div>
       </div>
       <div class="look">

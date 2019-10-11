@@ -125,10 +125,10 @@
       .right
         width 588px
         height 1148px
-        padding 30px 30px 20px
-        box-sizing border-box  
         overflow hidden
         .content
+          padding 0px 30px 20px
+          box-sizing border-box
           .header
             width 528px 
             height 192px

@@ -1,23 +1,23 @@
 <template>
   <footer id="footer_box">
     <ul class="footer_nav">
-      <li class="item" :class="{active: $route.path === '/home'}" @click="$router.replace('/')">
+      <li class="item" :class="{active: $route.path === '/home'}" @click="goHome">
         <i class="u-icon" :class="$route.path === '/home' ? 'u-icon-tabBar-index-active' : 'u-icon-tabBar-index'"></i>
         <span class="text">首页</span>
       </li>
-      <li class="item" :class="{active: $route.path.includes('/category')}" @click="$router.replace('/category')">
+      <li class="item" :class="{active: $route.path.includes('/category')}" @click="goCategory">
         <i class="u-icon" :class="$route.path.includes('/category') ? 'u-icon-tabBar-cate-active' : 'u-icon-tabBar-cate'"></i>
         <span class="text">分类</span>
       </li>
-      <li class="item" :class="{active: $route.path.includes('/things')}" @click="$router.replace('/things')">
+      <li class="item" :class="{active: $route.path.includes('/things')}" @click="goThings">
         <i class="u-icon" :class="$route.path.includes('/things') ? 'u-icon-tabBar-topic-active' : 'u-icon-tabBar-topic'"></i>
         <span class="text">识物</span>
       </li>
-      <li class="item" :class="{active: $route.path === '/shopcar'}" @click="$router.replace('/shopcar')">
+      <li class="item" :class="{active: $route.path === '/shopcar'}" @click="goShopcar">
         <i class="u-icon" :class="$route.path === '/shopcar' ? 'u-icon-tabBar-cart-active' : 'u-icon-tabBar-cart'"></i>
         <span class="text">购物车</span>
       </li>
-      <li class="item" @click="$router.replace('/personal')">
+      <li class="item" @click="goPersonal">
         <i class="u-icon" :class="$route.path === '/personal' ? 'u-icon-tabBar-ucenter-active' : 'u-icon-tabBar-ucenter'"></i>
         <span class="text">个人</span>
       </li>
@@ -31,7 +31,44 @@
     data () {
       return {
       }
-    }
+    },
+    methods: {
+      goThings(){
+        if (this.$route.path!=="/things/recommend") {
+          this.$router.replace('/things')          
+        }else{
+          return
+        }
+      },
+      goHome(){
+        if (this.$route.path!=="/home") {
+          this.$router.replace('/home')          
+        }else{
+          return
+        }
+      },
+      goCategory(){
+        if (this.$route.path!=="/category") {
+          this.$router.replace('/category')          
+        }else{
+          return
+        }
+      },
+      goShopcar(){
+        if (this.$route.path!=="/shopcar") {
+          this.$router.replace('/shopcar')          
+        }else{
+          return
+        }
+      },
+      goPersonal(){
+        if (this.$route.path!=="/personal") {
+          this.$router.replace('/personal')          
+        }else{
+          return
+        }
+      },
+    },
   }
 </script>
 

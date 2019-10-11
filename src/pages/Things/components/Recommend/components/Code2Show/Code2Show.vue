@@ -24,7 +24,7 @@
         </div>
       </div>
       <div class="right">
-        <img :src="topic.picUrl" alt="">
+        <img v-lazy="topic.picUrl" :src="topic.picUrl" alt="">
       </div>
     </div>
   </div>

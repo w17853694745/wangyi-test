@@ -1,6 +1,6 @@
 <template>
   <div class="header">
-    <div class="wrapper-header">
+    <div class="wrapper-header" :class="isFinds?'':'active'">
       <div class="main">
         <div class="left">
           <a href="javascipt:" @click="Toroute('home')">
@@ -8,8 +8,8 @@
           </a>
         </div>
         <div class="center">
-          <span class="active">发现</span>
-          <span>甄选家</span>
+          <span :class="{active:isFinds}" @click="changeType(true)" >发现</span>
+          <span :class="{active:!isFinds}" @click="changeType(false)" >甄选家</span>
         </div>
         <div class="right">
           <i class="search" @click="Toroute('search')">
@@ -21,7 +21,7 @@
         </div>
       </div>
     </div>
-    <div class="wrapper-bottom">
+    <div class="wrapper-bottom" v-if="isFinds">
       <div class="main">
         <div class="main-item" :class="currIndex == index?'active':''"  v-for="(tab, index) in tabList" :key="index" @click="currIndex = index">
           {{tab.name}}
@@ -33,11 +33,31 @@
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
+  import {mapState} from 'vuex'
   export default {
     methods: {
       Toroute(route){
         this.$router.push("/"+route)
+      },
+      changeType(flag){
+        this.isFinds = !this.isFinds
+        this.$store.dispatch("changeThingsType",this.isFinds)
+        if (flag) {
+          this.$router.replace("/things/recommend")
+        }else{
+          this.$router.replace("/things/selection")
+        }
+      },
+      // 问题:当没有wrapper-bottom的时候,刷新会报错,而且来回切换路由也会失效
+      mountedIsFind(){
+        let isFind = this.$route.path=="/things/recommend"?true:false
+        this.$store.dispatch("changeThingsType",isFind)
       }
+    },
+    computed: {
+      ...mapState({
+        isFind:state=>state.things.isFind
+      })
     },
     data() {
       return {
@@ -64,21 +84,38 @@
             name:"HOME"
           }
         ],
-        currIndex:0
+        currIndex:0,
+        isFinds:this.$route.path == "/things/recommend"
+      }
+    },
+    watch: {
+      isFinds(value){
+        if (value) {
+          this.$nextTick(()=>{
+            this.bScroll = new BScroll(".wrapper-bottom", {
+              click: true,
+              scrollX: true,
+              scrollY:false
+            })
+          })
+        }
       }
     },
     mounted() {
-      this.$nextTick(()=>{
-        if(!this.bScroll){
-          this.bScroll = new BScroll(".wrapper-bottom", {
-            click: true,
-            scrollX: true,
-            scrollY:false
-          })
-        }else{
-          this.bScroll.refresh()
-        }
-      })
+      this.mountedIsFind()
+      if (this.isFinds) {
+        this.$nextTick(()=>{
+          if(!this.bScroll){
+            this.bScroll = new BScroll(".wrapper-bottom", {
+              click: true,
+              scrollX: true,
+              scrollY:false
+            })
+          }else{
+            this.bScroll.refresh()
+          }
+        })
+      }
     },
   }
 </script>
@@ -90,17 +127,20 @@
     left 0
     top 0
     background white
+    z-index 100
     .wrapper-header
       width 100%
       height 100px
       padding 0 22px
       box-sizing border-box
       border-bottom 1px solid #d9d9d9 
+      &.active
+        height 88px
       .main
         display flex
         align-items center
         justify-content space-between
-        height 100px
+        height 100%
         position relative
         .left
           width 48px

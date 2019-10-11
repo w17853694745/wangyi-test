@@ -1,9 +1,17 @@
 import Home from '../pages/Home/Home.vue'
+
 import Category from '../pages/Category/Category.vue'
+
 import Things from '../pages/Things/Things.vue'
+import Recommend from '../pages/Things/components/Recommend/Recommend.vue'
+import Selection from '../pages/Things/components/Selection/Selection.vue'
+
 import Shopcar from '../pages/Shopcar/shopcar.vue'
+
 import Personal from '../pages/Personal/Personal.vue'
+
 import Search from '../pages/Search/Search.vue'
+
 
 export default [
   {
@@ -16,7 +24,21 @@ export default [
   },
   {
     path: "/things",
-    component: Things
+    component: Things,
+    children:[
+      {
+        path:"/things/recommend",
+        component: Recommend
+      },
+      {
+        path: "/things/selection",
+        component: Selection
+      },
+      {
+        path: "/things",
+        redirect: "/things/recommend"
+      }
+    ]
   },
   {
     path: "/shopcar",

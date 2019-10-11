@@ -7,6 +7,7 @@ import getters from "./getters"
 
 import category from "./modules/category/index"
 import things from './modules/things/index'
+import home from './modules/home/index'
 
 
 Vue.use(Vuex)
@@ -16,7 +17,8 @@ export default new Vuex.Store({
   getters,
   modules: {
     category,
-    things
+    things,
+    home
   }
 })
 

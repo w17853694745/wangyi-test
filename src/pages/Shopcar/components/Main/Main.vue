@@ -9,7 +9,7 @@
         <div class="text">
           去添加点什么吧
         </div>
-        <div class="login">登录</div>
+        <div class="login" @click="login">登录</div>
       </div>
     </div>
   </div>
@@ -17,6 +17,11 @@
 
 <script type="text/ecmascript-6">
   export default {
+    methods: {
+      login(){
+        this.$router.replace('/personal').catch(err => {err})
+      }
+    },
   }
 </script>
 

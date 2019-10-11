@@ -4,4 +4,12 @@ export default {
     hasMore: true,
     result: []
   },
+  isFind: true,
+  headerData:[],
+  threeTypeData: {
+    hasMore: true,
+    type: 1,
+    pagination: {},
+    topicList: []
+  }
 }

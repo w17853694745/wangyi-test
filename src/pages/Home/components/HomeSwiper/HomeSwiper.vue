@@ -1,8 +1,8 @@
 <template>
-    <div class="swiper-container">
-      <div class="swiper-wrapper">
-        <div class="swiper-slide" v-for="(item, index) in swiperImg" :key="index">
-          <img :src="item" alt="轮播" class="img">
+    <div class="swiper-container home-swiper">
+      <div class="swiper-wrapper home-wrapper">
+        <div class="swiper-slide home-slide" v-for="(item, index) in swiperImg" :key="index">
+          <img :src="item"  alt="轮播" class="img">
         </div>
       </div>
       <div class="swiper-pagination"></div>
@@ -28,7 +28,7 @@
       }
     },
     mounted() {
-      new Swiper('.swiper-container',{
+      new Swiper('.home-swiper',{
         autoplay: true,
         loop: true,
         pagination : {
@@ -40,11 +40,11 @@
 </script>
 
 <style lang="stylus" rel="stylesheet/stylus" scoped>
-  .swiper-container
+  .home-swiper
     height 375px
     width 100%
-    .swiper-wrapper
-      .swiper-slide
+    .home-wrapper
+      .home-slide
           .img
             height 100%
             width 100%

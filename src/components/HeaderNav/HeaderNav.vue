@@ -10,15 +10,15 @@
         </span>
       </div>
       
-      <span class="login_btn" @click="$router.push('/personal/emaillogin')">
+      <span class="login_btn" @click="$router.push('/personal')">
         登录
       </span>
     </div>
     
     <div class="header_nav">
       <div class="left_ul_box">
-        <ul class="left_ul clearfix" @click="addActive($event)">
-          <li v-for="(item, index) in shoppingList" :key="index" ><a href="javascript:" :class="{active: curA===index}" :data-this-index="index">{{item}}</a></li>
+        <ul class="left_ul clearfix" @click="addActive($event)" ref="rightUl">
+          <li @click="clickItem(index)" v-for="(item, index) in shoppingList" :key="index" ><a href="javascript:" :class="{active: curA===index}" :data-this-index="index">{{item}}</a></li>
         </ul>
       </div>
       <div class="right_span">
@@ -56,7 +56,8 @@
           "运动旅行",
           "数码家电",
           "全球特色"
-        ]
+        ],
+        lefts: [], // 右侧所有分类li的left的数组: lefts, 初始值为[], 列表数据显示之后统计lefts
       }
     },
     mounted () {
@@ -69,12 +70,34 @@
         }else{
           this.bScroll.refresh()
         }
-      })
+      }),
+      this.initTops()
     },
     methods: {
       addActive (e) {
         this.curA = +e.target.dataset.thisIndex
-      }
+      },
+      initTops () {
+        const lefts = []
+        let top = 0
+        lefts.push(top)
+        // 遍历所有右侧分类li
+        const lis = this.$refs.rightUl.children
+        Array.prototype.slice.call(lis).forEach(li => {
+          top += li.clientWidth
+          lefts.push(top)
+        })
+        // 更新lefts数据
+        this.lefts = lefts
+      },
+
+      clickItem (index) {
+        if (index<6) {
+          const top = this.lefts[index]
+          // 让右侧列表滑动到对应的位置
+          this.bScroll.scrollTo(-top, 0, 300)
+        }
+      },
     }
   }
 </script>
@@ -94,12 +117,13 @@
       flex-flow: row nowrap;
       align-items: center;
       background: #fff;
-      padding: 8px 15px;
+      padding: 15px 30px;
+      box-sizing border-box
       >img
         width 138px
         height 40px
         display: inline-block;
-        margin-right: 10px;
+        margin-right: 20px;
         background-size: cover;
         background-position: center;
       .search_box
@@ -111,29 +135,30 @@
         -webkit-box-pack center
         justify-content center
         height 56px
-        font-size 28px
+        font-size 27px
         background-color #ededed
-        border-radius 4px
+        border-radius 8px
         color #666
         >img
           display inline-block
           vertical-align: middle
           width 28px
           height 28px
-          margin-right 5px
+          margin-right 8px  
       .login_btn
-        width 76px
-        height 42px
-        line-height 42px
+        width 74px
+        height 36px
+        line-height 40px
         text-align center
         color #b4282d
-        border 1px solid #b4282d
-        border-radius 4px
+        border 2px solid #b4282d
+        border-radius 8px
         margin-left: 8px
         font-size 24px
+
     .header_nav
       width 100%
-      height: 75px;
+      height: 68px;
       position relative
       z-index 2
       margin-top -1px
@@ -157,10 +182,11 @@
             line-height 60px
             width 150px
             a.active
+              display inline-block
               box-sizing border-box
               min-width 90px
               color $themeColor
-              border-bottom 6px solid $themeColor
+              border-bottom 6px solid #b4282d
       .right_span
         display flex
         flex-grow 0

@@ -76,6 +76,7 @@
           line-height 94px
           font-size 28px
           margin-bottom 32px
+          border-radius 5px 
           .phone-icon
             display inline-block
             width 41px
@@ -94,7 +95,8 @@
           line-height 94px
           font-size 28px
           margin-bottom 32px
-          border 1px solid #DD1A21
+          border 2px solid #DD1A21
+          border-radius 5px 
           .email-icon
             display inline-block
             width 41px

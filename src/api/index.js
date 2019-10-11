@@ -16,3 +16,29 @@ export const reqAutoRecommendData = (page, size, exceptIds = '6409,6201,6408,641
   size,
   exceptIds
 })
+
+// 获取甄选家顶部的图片
+export const reqColection = () => axios("/api/topic/v1/look/getCollection.json?id=6")
+
+// 获取甄选家的评论数据
+export const reqList = (page, size, type) => axios({
+  url: "/api/topic/v1/look/getList.json",
+  params:{
+    page,
+    size,
+    type
+  }
+})
+
+// 搜索关键字
+export const reqInitSearch = () => axios({
+  url: `/api/xhr/search/init.json`,
+  method: "POST"
+})
+
+// 输入时搜索
+export const reqSearchResult = (keywordPrefix) => axios(`/api/xhr/search/searchAutoComplete.json`, {
+  params:{
+    keywordPrefix
+  }
+})

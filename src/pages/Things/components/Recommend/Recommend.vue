@@ -89,6 +89,8 @@
       width 100%
       .recommendList
         width 100%
+        &:nth-child(1)
+          padding-top 20px
         .recommendItem
           width 100%
 

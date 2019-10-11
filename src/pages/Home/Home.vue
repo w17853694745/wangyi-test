@@ -52,6 +52,10 @@
     </div> -->
     <!-- 底部信息 -->
     <FooterInfo/>
+    <!-- 定位礼物 -->
+    <div class="gift">
+      <i class="icon"></i>
+    </div>
     <FooterNav/>
   </div>
 </template>
@@ -218,9 +222,22 @@
   .home
     padding-top 146px 
     padding-bottom 100px
+    position relative
     .split
       width 100%
       height 20px
       margin 10px 0
       background rgba(0,0,0,.1)
+    .gift
+      position fixed 
+      right 0
+      bottom 240px  
+      width 112px
+      height 80px
+      .icon
+        display inline-block
+        width 100%
+        height 100%
+        background-image url(//yanxuan-static.nosdn.127.net/hxm/yanxuan-wap/p/20161201/style/img/icon-normal/wapNewUserEntry-b69d0624fd.png) 
+        background-size 100% 100%
 </style>

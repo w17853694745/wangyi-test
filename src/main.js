@@ -7,7 +7,13 @@ import store from './vuex/store'
 import 'lib-flexible/flexible'
 //模拟数据
 import './mockServer'
-//vuex
+import lazy from './common/image/lazy2.gif'
+//图片懒加载
+import VueLazyload from 'vue-lazyload'
+Vue.use(VueLazyload, {
+  loading: lazy
+})
+
 
 Vue.config.productionTip = false
 

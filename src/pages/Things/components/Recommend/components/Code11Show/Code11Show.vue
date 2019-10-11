@@ -5,7 +5,7 @@
         <span>{{topic.title}}</span>
       </div>
       <div class="img">
-        <img :src="topic.picUrl" alt="">
+        <img v-lazy="topic.picUrl" :src="topic.picUrl" alt="">
       </div>
       <div class="look">
         <i class="icon"></i>
